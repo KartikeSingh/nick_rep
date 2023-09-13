@@ -5,17 +5,12 @@ module.exports = async ({ interaction, data, parseInput = (int) => int.values[0]
 
     if (modal) {
         if (collector) return resolve([
-            null,
+            collector,
             parseInput(collector)
         ]);
 
-        await collector.reply({
-            ephermal: true,
-            content: "Response Collected"
-        });
-
         resolve([
-            null,
+            collector,
             null
         ])
     }

@@ -258,7 +258,7 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setTitle("⭐ New Reputation")
-                                .setDescription(`${interaction.user.toString()} has given ${user.toString()} a rep!\n${user.toString()} now have \`${receiverData.reputation + 1}\` reps!`)
+                                .setDescription(`${interaction.user.toString()} has given ${user.toString()} a rep!\n${user.toString()} now has \`${receiverData.reputation + 1}\` reps!`)
                                 .setColor("Green")
                                 .addFields({
                                     name: "👷 Service",

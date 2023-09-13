@@ -122,6 +122,27 @@ module.exports = {
 
         const [newInt2, reason] = await chooseReason({ interaction: newInteraction, guildData, category });
 
+        if (!reason) return newInt2.update({
+            embeds: [
+                new EmbedBuilder()
+                    .setColor("Red")
+                    .setTitle("❌ Error")
+                    .setDescription("You took too long in selecting reputation category")
+            ],
+            ephemeral: true,
+            components: [],
+        });
+
+        newInt2.update({
+            embeds: [
+                new EmbedBuilder()
+                    .setColor("Yellow")
+                    .setTitle("📩 Saving Reputation")
+            ],
+            components: [],
+            ephemeral: true
+        });
+
         const staff = interaction.member.roles.cache.has(process.env.STAFF_ROLE);
 
         await userModel.updateOne({ id: interaction.user.id }, { [`timeouts.${receiverData.id}`]: Date.now() + 48 * 3600 * 1000, [`timeouts.lastRep`]: Date.now() + 600000 });
@@ -205,7 +226,7 @@ module.exports = {
             embeds: [
                 new EmbedBuilder()
                     .setTitle("⭐ New Reputation")
-                    .setDescription(`${interaction.user.toString()} has given ${user.toString()} a rep!\n${user.toString()} now have \`${receiverData.reputation + 1}\` reps!`)
+                    .setDescription(`${interaction.user.toString()} has given ${user.toString()} a rep!\n${user.toString()} now has \`${receiverData.reputation + 1}\` reps!`)
                     .setColor("Green")
                     .addFields({
                         name: "👷 Service",
@@ -247,5 +268,15 @@ module.exports = {
         })
 
         updateReputation({ client, user });
+
+       await interaction.editReply({
+            embeds: [
+                new EmbedBuilder()
+                    .setColor("Green")
+                    .setTitle("✅ Reputation Saved")
+            ],
+            components: [],
+            ephemeral: true
+        });
     }
 }
