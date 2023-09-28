@@ -49,7 +49,7 @@ module.exports = async ({ client, data, userData }) => {
                     .setTitle("⭐ New Reputation")
                     .setDescription(publicMessage.embeds[0].description.replace(/\`\d+\`/, `\`${userData.reputation}\``))
                     .setColor(data.isValid ? "Green" : "Red")
-                    .addFields(adminMessage.embeds[0].fields.map((v, i) => i === 1 ? ({
+                    .addFields(publicMessage.embeds[0].fields.map((v, i) => i === 1 ? ({
                         name: "🚦 Status",
                         value: `\`${data.isValid ? "V" : "Inv"}alid\``,
                         inline: true
