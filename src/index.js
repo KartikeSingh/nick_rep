@@ -15,9 +15,12 @@ app.listen(process.env.PORT || 3001);
 // Database setup
 const mongoose = require('mongoose');
 
+// Set strictQuery to false
+mongoose.set('strictQuery', false);
+
 mongoose.connect(process.env.MONGO_URI).then(() => console.log("Database Connected")).catch(() => console.log("Database Connection Failed"))
 
 // Discord Client Setup
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages] });
 
 client.login(process.env.TOKEN);
